@@ -86,6 +86,32 @@ CREATE TABLE IF NOT EXISTS `order_items` (
     INDEX `idx_item_product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
+-- 7. Payments Table
+CREATE TABLE IF NOT EXISTS `payments` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `order_id` INT NOT NULL,
+    `razorpay_order_id` VARCHAR(100) DEFAULT NULL,
+    `razorpay_payment_id` VARCHAR(100) DEFAULT NULL,
+    `razorpay_signature` VARCHAR(255) DEFAULT NULL,
+    `amount` DECIMAL(10,2) NOT NULL,
+    `currency` VARCHAR(10) DEFAULT 'INR',
+    `status` VARCHAR(30) DEFAULT 'created',
+    `payment_method` VARCHAR(50) DEFAULT 'razorpay',
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT `fk_payments_order`
+        FOREIGN KEY (`order_id`)
+        REFERENCES `orders` (`id`)
+        ON DELETE CASCADE,
+
+    INDEX `idx_payment_order` (`order_id`),
+    INDEX `idx_razorpay_order` (`razorpay_order_id`),
+    INDEX `idx_razorpay_payment` (`razorpay_payment_id`),
+    INDEX `idx_payment_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- ==========================================
 -- Insert Sample Categories
 -- ==========================================

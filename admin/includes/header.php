@@ -20,13 +20,14 @@ requireAdmin();
         }
 
         .admin-nav {
-            background-color: var(--bg-card);
+            background: rgba(10, 11, 15, 0.95);
             border-bottom: 1px solid var(--border);
-            padding: 1.5rem 0;
+            padding: 1.1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         .admin-nav-content {
@@ -40,43 +41,63 @@ requireAdmin();
 
         .admin-logo {
             font-family: var(--font-heading);
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             color: var(--primary);
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-weight: 700;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .admin-logo:hover {
+            color: var(--primary-light);
+            text-shadow: 0 0 20px rgba(197,168,128,0.4);
         }
 
         .admin-logo span {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-            margin-left: 5px;
-            padding-left: 8px;
-            border-left: 1px solid var(--border);
-            letter-spacing: 4px;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-family: var(--font-body);
+            margin-left: 2px;
+            padding: 3px 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .admin-nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 4px;
             list-style: none;
+            align-items: center;
         }
 
         .admin-nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 1px;
             transition: var(--transition-smooth);
+            padding: 6px 14px;
+            border-radius: 6px;
         }
 
-        .admin-nav-links a:hover,
+        .admin-nav-links a:hover {
+            color: var(--primary);
+            background: rgba(197,168,128,0.07);
+        }
+
         .admin-nav-links a.active {
             color: var(--primary);
+            background: rgba(197,168,128,0.1);
+            border: 1px solid rgba(197,168,128,0.2);
         }
 
         /* Tables styling */
@@ -350,8 +371,9 @@ requireAdmin();
             <li><a href="products.php" class="<?= isset($activePage) && $activePage === 'products' ? 'active' : '' ?>">Products</a></li>
             <li><a href="categories.php" class="<?= isset($activePage) && $activePage === 'categories' ? 'active' : '' ?>">Categories</a></li>
             <li><a href="orders.php" class="<?= isset($activePage) && $activePage === 'orders' ? 'active' : '' ?>">Orders</a></li>
-            <li><a href="../index.php" style="color: var(--primary);">View Store</a></li>
-            <li><a href="../logout.php">Logout</a></li>
+            <li><a href="../index.php" style="color: var(--primary);">&#8594; Store</a></li>
+            <li><a href="../logout.php" style="color: var(--danger);">Logout</a></li>
         </ul>
     </div>
 </header>
+
